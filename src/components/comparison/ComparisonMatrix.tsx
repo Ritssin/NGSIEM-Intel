@@ -18,9 +18,8 @@ export function ComparisonMatrix() {
       <table className="w-full border-collapse text-sm" style={{ minWidth: `${200 + selectedVendors.length * 120}px` }}>
         <thead>
           <tr className="sticky top-0 z-20 bg-bg-card">
-            {/* Category label column header */}
             <th className="sticky left-0 z-30 bg-bg-card w-48 min-w-[12rem] px-4 py-3 text-left border-b border-r border-border-color">
-              <span className="text-xs font-semibold text-text-muted uppercase tracking-wide">Category</span>
+              <span className="type-tbl-head text-text-muted uppercase">Category</span>
             </th>
 
             {selectedVendors.map((vendor) => (
@@ -34,19 +33,22 @@ export function ComparisonMatrix() {
                 <div className="flex flex-col items-center gap-1">
                   <div className="flex items-center gap-1.5">
                     <div
-                      className="w-2.5 h-2.5 rounded-full flex-shrink-0"
+                      className="w-2 h-2 rounded-full flex-shrink-0"
                       style={{ backgroundColor: vendor.logoColor }}
                     />
-                    <span className="text-xs font-semibold text-text-primary truncate max-w-[80px]">
-                      {vendor.isSophos ? vendor.name : vendor.name}
+                    <span className="type-tbl-head text-text-primary truncate max-w-[80px]">
+                      {vendor.name}
                     </span>
                     {vendor.isSophos && (
-                      <span className="text-xs bg-sophos-blue text-white px-1 py-0.5 rounded text-[10px] font-bold">
-                        OUR PRODUCT
+                      <span
+                        className="type-badge-small px-2 py-0.5 rounded flex-shrink-0"
+                        style={{ background: 'var(--color-sophos-tag-bg)', color: 'var(--color-sophos-tag-fg)' }}
+                      >
+                        US
                       </span>
                     )}
                   </div>
-                  <p className="text-[10px] text-text-muted truncate max-w-[100px]">{vendor.productName}</p>
+                  <p className="text-xs text-text-muted truncate max-w-[100px]">{vendor.productName}</p>
                   <ScoreBadge score={vendor.overallScore} size="sm" />
                 </div>
               </th>
@@ -62,7 +64,6 @@ export function ComparisonMatrix() {
                 rowIdx % 2 === 0 ? 'bg-bg-card' : 'bg-bg-primary',
               )}
             >
-              {/* Sticky category label */}
               <td className="sticky left-0 z-10 px-4 py-2 border-r border-border-color"
                 style={{ backgroundColor: 'var(--color-bg-card)' }}>
                 <Tooltip
@@ -101,10 +102,10 @@ export function ComparisonMatrix() {
             </tr>
           ))}
 
-          {/* Overall score row */}
+          {/* Overall score row — big number display */}
           <tr className="bg-bg-secondary border-t-2 border-border-color font-semibold">
             <td className="sticky left-0 z-10 px-4 py-3 border-r border-border-color bg-bg-secondary">
-              <p className="text-sm font-semibold text-text-primary">Overall Score</p>
+              <p className="type-base-semibold text-text-primary">Overall Score</p>
               <p className="text-xs text-text-muted">Weighted average</p>
             </td>
             {selectedVendors.map((vendor) => (
@@ -115,8 +116,13 @@ export function ComparisonMatrix() {
                   vendor.isSophos && 'border-l-2 border-r-2 border-b-2 border-sophos-blue/40',
                 )}
               >
-                <div className="flex justify-center">
-                  <ScoreBadge score={vendor.overallScore} size="lg" />
+                <div className="flex flex-col items-center gap-1">
+                  <span style={{ font: '400 36px/1.22 Inter', color: 'var(--color-text-primary)' }}>
+                    {vendor.overallScore.toFixed(1)}
+                  </span>
+                  <span className="type-base-small uppercase" style={{ color: 'var(--color-text-muted)' }}>
+                    Weighted
+                  </span>
                 </div>
               </td>
             ))}

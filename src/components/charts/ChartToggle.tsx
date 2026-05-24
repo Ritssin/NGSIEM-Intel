@@ -1,14 +1,14 @@
-import { Activity, Grid3x3, BarChart2 } from 'lucide-react'
 import { useComparisonStore } from '@/store/useComparisonStore'
+import { MIcon } from '@/components/ui/MIcon'
 import { Tabs } from '@/components/ui/Tabs'
 import { RadarChart } from './RadarChart'
 import { HeatmapGrid } from './HeatmapGrid'
 import { BarComparison } from './BarComparison'
 
 const CHART_TABS = [
-  { id: 'radar', label: 'Radar', icon: <Activity size={13} /> },
-  { id: 'heatmap', label: 'Heatmap', icon: <Grid3x3 size={13} /> },
-  { id: 'bar', label: 'Bar Chart', icon: <BarChart2 size={13} /> },
+  { id: 'radar', label: 'Radar', icon: <MIcon name="radar" size={13} /> },
+  { id: 'heatmap', label: 'Heatmap', icon: <MIcon name="grid_view" size={13} /> },
+  { id: 'bar', label: 'Bar Chart', icon: <MIcon name="bar_chart" size={13} /> },
 ]
 
 export function ChartToggle() {
@@ -17,7 +17,7 @@ export function ChartToggle() {
   const view = activeView === 'matrix' ? 'radar' : activeView
 
   return (
-    <div className="bg-bg-card border border-border-color rounded-xl overflow-hidden">
+    <div className="bg-bg-card border border-border-color rounded overflow-hidden">
       <div className="flex items-center justify-between px-4 py-3 border-b border-border-color">
         <h2 className="text-sm font-semibold text-text-primary">Visual Comparison</h2>
         <Tabs

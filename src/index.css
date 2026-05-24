@@ -1,33 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --color-bg-primary: #F8FAFC;
-  --color-bg-secondary: #F1F5F9;
-  --color-bg-card: #FFFFFF;
-  --color-bg-sidebar: #F1F5F9;
-  --color-bg-hover: #E2E8F0;
-  --color-text-primary: #0F172A;
-  --color-text-secondary: #475569;
-  --color-text-muted: #94A3B8;
-  --color-border: #E2E8F0;
-  --color-sophos-blue: #0066CC;
-  --color-sophos-blue-light: #3385D6;
+  /* Surfaces */
+  --color-bg-primary: #f0f2f4;
+  --color-bg-secondary: #f5f5f5;
+  --color-bg-card: #ffffff;
+  --color-bg-sidebar: #2c2d2e;
+  --color-bg-hover: #e5e7ea;
+
+  /* Text */
+  --color-text-primary: #212121;
+  --color-text-secondary: #505050;
+  --color-text-muted: #737373;
+
+  /* Borders */
+  --color-border: #eaeaea;
+  --color-rule: #c9c9c9;
+
+  /* Interactive — Sophos blue */
+  --color-sophos-blue: #0049bd;
+  --color-sophos-blue-light: #003996;
+  --color-sophos-blue-pressed: #002562;
+  --color-sophos-blue-selected: #f3f8ff;
+  --color-sophos-tag-bg: #e5effa;
+  --color-sophos-tag-fg: #005bc8;
+
+  /* Feedback */
+  --color-negative: #da0711;
+  --color-caution: #ab8a17;
+  --color-positive: #36a151;
+  --color-info: #5a068e;
+  --color-bg-negative: #f8cdcf;
+  --color-bg-caution: #f4efc1;
+  --color-bg-positive: #d7ecdc;
+  --color-bg-info: #decde8;
+
+  /* Severity ramp */
+  --severity-critical: #da0711;
+  --severity-high: #e86800;
+  --severity-medium: #ab8a17;
+  --severity-low: #538184;
+  --severity-info: #9976a6;
+
+  /* Datavis — 6-color hue-separated set */
+  --datavis-blue-70: #0c70d4;
+  --datavis-violet-80: #5a068e;
+  --datavis-magenta-60: #bc108e;
+  --datavis-apricot-70: #cc5c00;
+  --datavis-pine-50: #007769;
+  --datavis-blue-50: #3996f3;
+
+  /* Top nav (navy bar) */
+  --color-nav-bg: #001a47;
+  --color-nav-text: #bdbdbd;
+  --color-nav-text-selected: #65adf6;
 }
 
 .dark {
-  --color-bg-primary: #0F172A;
-  --color-bg-secondary: #1E293B;
-  --color-bg-card: #1E293B;
-  --color-bg-sidebar: #0A1628;
-  --color-bg-hover: #334155;
-  --color-text-primary: #F1F5F9;
-  --color-text-secondary: #CBD5E1;
-  --color-text-muted: #64748B;
-  --color-border: #334155;
-  --color-sophos-blue: #3385D6;
-  --color-sophos-blue-light: #60A5FA;
+  --color-bg-primary: #121212;
+  --color-bg-secondary: #2a2a2a;
+  --color-bg-card: #1e1e1e;
+  --color-bg-sidebar: #2c2d2e;
+  --color-bg-hover: #424344;
+  --color-text-primary: #f5f5f5;
+  --color-text-secondary: #e0e0e0;
+  --color-text-muted: #9e9e9e;
+  --color-border: #434343;
+  --color-rule: #747474;
+  --color-sophos-blue: #81cefd;
+  --color-sophos-blue-light: #b5e1fe;
+  --color-sophos-blue-selected: #14293d;
+  /* feedback, severity, datavis, nav inherit from :root */
 }
 
 * {
@@ -45,9 +92,21 @@ body,
 body {
   background-color: var(--color-bg-primary);
   color: var(--color-text-primary);
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   transition: background-color 0.2s ease, color 0.2s ease;
 }
+
+/* Type roles */
+.type-page-title      { font: 900 24px/1.33 'Inter', sans-serif; letter-spacing: 0.7px; }
+.type-section-title   { font: 700 20px/1.2  'Inter', sans-serif; letter-spacing: 0.6px; }
+.type-container-title { font: 700 14px/1.43 'Inter', sans-serif; letter-spacing: 0.4px; }
+.type-base            { font: 400 14px/1.29 'Inter', sans-serif; }
+.type-base-semibold   { font: 600 14px/1.29 'Inter', sans-serif; }
+.type-base-small      { font: 600 12px/1.33 'Inter', sans-serif; letter-spacing: 0.3px; }
+.type-button          { font: 600 14px/1    'Inter', sans-serif; letter-spacing: 0.35px; }
+.type-tbl-head        { font: 700 12px/1.17 'Inter', sans-serif; letter-spacing: 0.3px; }
+.type-tab-label       { font: 700 14px/1    'Inter', sans-serif; letter-spacing: 0.5px; text-transform: uppercase; }
+.type-badge-small     { font: 700 10px/1.4  'Inter', sans-serif; letter-spacing: 0.7px; text-transform: uppercase; }
 
 /* Scrollbar styling */
 ::-webkit-scrollbar {
@@ -67,15 +126,8 @@ body {
 
 /* Print styles */
 @media print {
-  .no-print {
-    display: none !important;
-  }
-  .print-full-width {
-    width: 100% !important;
-    max-width: none !important;
-  }
-  body {
-    background: white;
-    color: black;
-  }
+  body { background: white !important; color: #212121 !important; }
+  .no-print { display: none !important; }
+  .print-full-width { width: 100% !important; max-width: none !important; }
+  header { background: white !important; color: #212121 !important; border-bottom: 1px solid #c9c9c9 !important; }
 }

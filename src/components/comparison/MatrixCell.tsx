@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Info, Sparkles, Plus } from 'lucide-react'
+import { MIcon } from '@/components/ui/MIcon'
 import { ScoreBadge } from './ScoreBadge'
 import type { CategoryScore, Vendor } from '@/types/vendor'
 import type { CategoryDefinition } from '@/types/vendor'
@@ -48,39 +48,37 @@ export function MatrixCell({ vendor, category, scoreEntry, isSophos }: MatrixCel
       {isUnscored ? (
         <button
           onClick={openEdit}
-          className="w-9 h-9 rounded-full border-2 border-dashed border-border-color flex items-center justify-center text-text-muted hover:border-sophos-blue hover:text-sophos-blue transition-colors"
-          title="Add score"
+          className="w-9 h-9 rounded border-2 border-dashed border-border-color flex items-center justify-center text-text-muted hover:border-sophos-blue hover:text-sophos-blue transition-colors"
+          title="Score this category"
         >
-          <Plus size={14} />
+          <MIcon name="add" size={14} />
         </button>
       ) : (
         <div className="flex flex-col items-center gap-0.5">
           <ScoreBadge score={score} />
           <div className="flex items-center gap-1">
             {scoreEntry?.dataSource === 'ai-generated' && (
-              <Sparkles size={10} className="text-purple-400" />
+              <MIcon name="auto_awesome" size={12} className="text-text-muted" />
             )}
             <button
               onClick={openEdit}
               className="text-text-muted hover:text-text-secondary transition-colors"
               title="View details / edit"
             >
-              <Info size={11} />
+              <MIcon name="info" size={12} />
             </button>
           </div>
         </div>
       )}
 
-      {/* Score detail popover */}
       {popoverOpen && (
         <>
           <div className="fixed inset-0 z-40" onClick={() => setPopoverOpen(false)} />
-          <div className="absolute z-50 left-1/2 -translate-x-1/2 top-full mt-1 w-80 bg-bg-card border border-border-color rounded-xl shadow-2xl p-4">
-            <p className="text-xs font-semibold text-text-secondary mb-3">
+          <div className="absolute z-50 left-1/2 -translate-x-1/2 top-full mt-1 w-80 bg-bg-card border border-border-color rounded shadow-2xl p-4">
+            <p className="type-base-small text-text-secondary mb-3">
               {vendor.name} — {category.label}
             </p>
 
-            {/* Show existing rationale */}
             {scoreEntry && !isUnscored && scoreEntry.rationale && (
               <div className="mb-3">
                 <p className="text-xs text-text-secondary leading-relaxed mb-2">{scoreEntry.rationale}</p>
@@ -108,7 +106,7 @@ export function MatrixCell({ vendor, category, scoreEntry, isSophos }: MatrixCel
                   step="0.5"
                   value={editScore}
                   onChange={(e) => setEditScore(e.target.value)}
-                  className="w-full px-3 py-1.5 text-sm bg-bg-secondary border border-border-color rounded-lg text-text-primary focus:outline-none focus:ring-2 focus:ring-sophos-blue/40"
+                  className="w-full px-3 py-1.5 text-sm bg-bg-secondary border border-border-color rounded text-text-primary focus:outline-none focus:ring-2 focus:ring-sophos-blue/40"
                 />
               </div>
               <div>
@@ -117,13 +115,13 @@ export function MatrixCell({ vendor, category, scoreEntry, isSophos }: MatrixCel
                   rows={3}
                   value={editRationale}
                   onChange={(e) => setEditRationale(e.target.value)}
-                  className="w-full px-3 py-1.5 text-xs bg-bg-secondary border border-border-color rounded-lg text-text-primary focus:outline-none focus:ring-2 focus:ring-sophos-blue/40 resize-none"
+                  className="w-full px-3 py-1.5 text-xs bg-bg-secondary border border-border-color rounded text-text-primary focus:outline-none focus:ring-2 focus:ring-sophos-blue/40 resize-none"
                 />
               </div>
               <div className="flex gap-2">
                 <button
                   onClick={saveEdit}
-                  className="flex-1 px-3 py-1.5 text-xs font-medium bg-sophos-blue text-white rounded-lg hover:bg-sophos-blue-light"
+                  className="flex-1 px-3 py-1.5 text-xs font-semibold bg-sophos-blue text-white rounded-lg hover:bg-sophos-blue-light"
                 >
                   Save
                 </button>

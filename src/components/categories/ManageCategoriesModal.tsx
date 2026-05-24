@@ -101,7 +101,7 @@ export function ManageCategoriesModal({ isOpen, onClose }: ManageCategoriesModal
                   <div className="flex items-center gap-2 mb-1.5">
                     <span className="text-sm font-medium text-text-primary">{cat.label}</span>
                     {cat.isBuiltIn && (
-                      <span className="text-[10px] text-text-muted bg-bg-hover px-1.5 py-0.5 rounded">built-in</span>
+                      <span className="text-xs text-text-muted bg-bg-hover px-1.5 py-0.5 rounded">built-in</span>
                     )}
                   </div>
                   <div className="flex items-center gap-2">
@@ -161,7 +161,7 @@ export function ManageCategoriesModal({ isOpen, onClose }: ManageCategoriesModal
 
       {/* Add new category */}
       {showAddForm ? (
-        <div className="border border-border-color rounded-xl p-4 space-y-3">
+        <div className="border border-border-color rounded p-4 space-y-3">
           <p className="text-sm font-semibold text-text-primary">New Category</p>
 
           <div className="grid grid-cols-2 gap-3">

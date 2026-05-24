@@ -1,7 +1,6 @@
-import { Download, ChevronDown } from 'lucide-react'
 import { useState } from 'react'
 import { ThemeToggle } from '@/components/ui/ThemeToggle'
-import { Button } from '@/components/ui/Button'
+import { MIcon } from '@/components/ui/MIcon'
 import { useVendorStore } from '@/store/useVendorStore'
 import { useCategoryStore } from '@/store/useCategoryStore'
 
@@ -49,37 +48,42 @@ export function TopNav() {
   }
 
   return (
-    <header className="h-14 flex items-center px-4 gap-3 border-b border-border-color bg-bg-card sticky top-0 z-40 no-print">
-      {/* Logo */}
+    <header
+      className="h-12 flex items-center px-4 gap-3 sticky top-0 z-40 no-print"
+      style={{ background: 'var(--color-nav-bg)', color: '#fff' }}
+    >
       <div className="flex items-center gap-2.5 flex-shrink-0">
-        <img src="/sophos-logo.svg" alt="Sophos" className="h-7 text-text-primary" />
+        <img src="/sophos-logo-white.svg" alt="Sophos" className="h-5" />
       </div>
 
-      <div className="w-px h-6 bg-border-color mx-1" />
+      <div className="w-px h-5 bg-white/20 mx-1" />
 
       <div className="flex-1 min-w-0">
-        <h1 className="text-sm font-semibold text-text-primary truncate">
+        <h1 className="type-page-title text-white truncate" style={{ fontSize: 16 }}>
           NG SIEM Vendor Intelligence
         </h1>
-        <p className="text-xs text-text-muted hidden sm:block">Competitive Analysis Platform</p>
+        <p className="type-base-small hidden sm:block uppercase" style={{ color: 'var(--color-nav-text)', fontSize: 10 }}>
+          NG SIEM vendor analysis
+        </p>
       </div>
 
-      <div className="flex items-center gap-1.5">
-        {/* Export dropdown */}
+      <div className="flex items-center gap-1">
         <div className="relative">
-          <Button
-            variant="secondary"
-            size="sm"
+          <button
             onClick={() => setExportOpen((o) => !o)}
+            className="inline-flex items-center gap-1.5 h-7 px-2.5 rounded-lg transition-all duration-150 type-button"
+            style={{ color: '#fff', background: 'rgba(255,255,255,0.08)' }}
+            onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(255,255,255,0.15)')}
+            onMouseLeave={(e) => (e.currentTarget.style.background = 'rgba(255,255,255,0.08)')}
           >
-            <Download size={14} />
+            <MIcon name="download" size={16} />
             Export
-            <ChevronDown size={12} />
-          </Button>
+            <MIcon name="expand_more" size={16} />
+          </button>
           {exportOpen && (
             <>
               <div className="fixed inset-0 z-40" onClick={() => setExportOpen(false)} />
-              <div className="absolute right-0 top-full mt-1 z-50 w-40 bg-bg-card border border-border-color rounded-lg shadow-lg overflow-hidden">
+              <div className="absolute right-0 top-full mt-1 z-50 w-40 bg-bg-card border border-border-color rounded shadow-lg overflow-hidden">
                 <button
                   onClick={exportCSV}
                   className="w-full text-left px-3 py-2 text-sm text-text-primary hover:bg-bg-hover"
@@ -103,7 +107,7 @@ export function TopNav() {
           )}
         </div>
 
-        <ThemeToggle />
+        <ThemeToggle className="w-9 h-9 flex items-center justify-center rounded-lg transition-all duration-200 text-white/70 hover:text-white hover:bg-white/10" />
       </div>
     </header>
   )

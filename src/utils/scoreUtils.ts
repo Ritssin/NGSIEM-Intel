@@ -1,4 +1,5 @@
 import type { Vendor, CategoryDefinition } from '@/types/vendor'
+import { scoreToBg } from '@/utils/colorUtils'
 
 export function calculateOverallScore(vendor: Vendor, categories: CategoryDefinition[]): number {
   let weightedSum = 0
@@ -18,26 +19,20 @@ export function calculateOverallScore(vendor: Vendor, categories: CategoryDefini
 
 export function getScoreColor(score: number | null): string {
   if (score === null) return 'text-text-muted'
-  if (score >= 9) return 'text-blue-500'
-  if (score >= 7) return 'text-green-500'
-  if (score >= 5) return 'text-amber-500'
-  return 'text-red-500'
+  if (score >= 7) return 'text-feedback-positive'
+  if (score >= 5) return 'text-feedback-caution'
+  return 'text-feedback-negative'
 }
 
-export function getScoreBgColor(score: number | null): string {
-  if (score === null) return 'bg-bg-hover text-text-muted'
-  if (score >= 9) return 'bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300'
-  if (score >= 7) return 'bg-green-100 text-green-700 dark:bg-green-900/40 dark:text-green-300'
-  if (score >= 5) return 'bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300'
-  return 'bg-red-100 text-red-700 dark:bg-red-900/40 dark:text-red-300'
+export function getScoreBgColor(score: number | null): { bg: string; fg: string } {
+  return scoreToBg(score)
 }
 
 export function getScoreBarColor(score: number | null): string {
   if (score === null) return 'bg-border-color'
-  if (score >= 9) return 'bg-blue-500'
-  if (score >= 7) return 'bg-green-500'
-  if (score >= 5) return 'bg-amber-500'
-  return 'bg-red-500'
+  if (score >= 7) return 'bg-feedback-positive'
+  if (score >= 5) return 'bg-feedback-caution'
+  return 'bg-feedback-negative'
 }
 
 export function normalizeWeights(weights: Record<string, number>): Record<string, number> {
@@ -51,8 +46,8 @@ export function normalizeWeights(weights: Record<string, number>): Record<string
 }
 
 export const CUSTOM_COLORS = [
-  '#8B5CF6', '#10B981', '#F59E0B', '#EC4899',
-  '#6366F1', '#14B8A6', '#F97316', '#DB2777',
+  '#3996f3', '#007769', '#bc108e', '#cc5c00',
+  '#5a068e', '#0c70d4', '#538184', '#9976a6',
 ]
 
 export function getCustomColor(index: number): string {
